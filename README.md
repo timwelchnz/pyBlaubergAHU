@@ -1,16 +1,23 @@
 # pyBlaubergAHU
 
-**DISCLAIMER**
+**DISCLAIMER!!**
+
 I am not a Python Programmer! 
 
-I forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
+I forked @aglehmann pyEcovent library found [here](https://github.com/aglehmann/pyEcovent/) as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
 
 I have poked and prodded it and added parameters from the included PDF so that it worked better with my AHU.
 
 Once it was working well I have re-named it completely since it's no longer for just a fan but the whole Air Handling Unit.
 
 
-**Python3 library for a Blauberg Komfort Air Handling Unit**
+## NOTES
+This library mimics the behaviour of the Blauberg Mobile app which connects via UDP to Port 4000.
+
+@jvitkauskas has [another library](https://github.com/jvitkauskas/pybls21) which connects via TCP to Port 502. I was unable to get this working with my AHU with it 
+
+
+## **Python3 library for a Blauberg Komfort Air Handling Unit**
 
 ## Install
 	Manual download at this stage. I'll publish it on PyPi as a pip package when I have v1 ready.
