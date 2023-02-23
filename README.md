@@ -13,43 +13,43 @@ Python3 library for a Blauberg Komfort Air Handling Unit
 	pip3 install pyBlaubergAHU
 
 ## Example usage
-	from ecovent import Fan
-	""" Create a new fan with IP Address """
-	""" The Fan object takes 'host', 'name', 'port' as arguments """
+	from pyBlaubergAHU import AHU
+	""" Create a new ahu with IP Address """
+	""" The Ahu object takes 'host', 'name', 'port' as arguments """
 	""" 'host' (IP address) is the only mandatory argument """
-	""" 'name' is optional and will default to ecofan """
+	""" 'name' is optional and will default to Home """
 	""" 'port' is also optional and will default to 4000 """"
-	fan=Fan("192.168.0.22")
+	ahu=AHU("192.168.0.22")
 	
-	""" Optinally create a Fan with a name  
-	fan=Fan("192.168.0.22", "Cellar Fan")
+	""" Optinally create a AHU with a name  
+	ahu=AHU("192.168.0.22", "Cellar AHU")
 
-	""" Update the current values of the fan """
-	fan.update()
+	""" Update the current values of the AHU """
+	ahu.update()
 
 
 	""" Print the current configured values """
-	print(fan.state)
-	print(fan.speed)
-	print(fan.man_speed)
-	print(fan.airflow)
-	print(fan.humidity)
+	print(ahu.state)
+	print(ahu.speed)
+	print(ahu.man_speed)
+	print(ahu.airflow)
+	print(ahu.humidity)
 
 	""" Set speed to medium (low=1 / medium=2 / high=3) """
-	fan.set_speed(2)
-	print(fan.speed)
+	ahu.set_speed(2)
+	print(ahu.speed)
 
-	""" Set fan state to off/on """
-	fan.set_state_off()
-	fan.set_state_on()
+	""" Set AHU state to off/on """
+	ahu.set_state_off()
+	ahu.set_state_on()
 
 	""" Set manual speed to 123 (valid values 22 -> 255) """
-	fan.set_man_speed(123)
-	print(fan.man_speed)
+	ahu.set_man_speed(123)
+	print(ahu.man_speed)
 
 	""" Set airflow to 'Air Supply' (ventilation=0 / heat recovery=1 / air supply=2)"""
-	fan.set_airflow(2)
-	print(fan.airflow)
+	ahu.set_airflow(2)
+	print(ahu.airflow)
 
 ## Intended usage
 The intended usage of this library is to include Blauberg Komfort AHU's in <https://www.home-assistant.io/>
