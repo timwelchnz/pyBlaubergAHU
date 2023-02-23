@@ -1,3 +1,4 @@
 ./.gitignore
 blaubergahu/__pycache__/
 blaubergahu/__init__.pyc
+pyproject.toml

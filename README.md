@@ -1,16 +1,20 @@
 # pyBlaubergAHU
 
-*** DISCLAIMER ***
-I'm not a Python Programmer! 
+**DISCLAIMER**
+I am not a Python Programmer! 
 
-I've forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
+I forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
 
-I poked and prodded it and added parameters from the included PDF so that it worked better with my unit.
+I have poked and prodded it and added parameters from the included PDF so that it worked better with my AHU.
 
-Python3 library for a Blauberg Komfort Air Handling Unit
+Once it was working well I have re-named it completely since it's no longer for just a fan but the whole Air Handling Unit.
+
+
+**Python3 library for a Blauberg Komfort Air Handling Unit**
 
 ## Install
-	pip3 install pyBlaubergAHU
+	Manual download at this stage. I'll publish it on PyPi as a pip package when I have v1 ready.
+	~~pip3 install pyBlaubergAHU~~
 
 ## Example usage
 	from pyBlaubergAHU import AHU
