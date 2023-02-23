@@ -4,7 +4,7 @@
 
 I am not a Python Programmer! 
 
-I forked @aglehmann pyEcovent library found [here](https://github.com/aglehmann/pyEcovent/) as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
+I forked @aglehmann [pyEcovent library found here](https://github.com/aglehmann/pyEcovent/) as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
 
 I have poked and prodded it and added parameters from the included PDF so that it worked better with my AHU.
 
