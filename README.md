@@ -1,9 +1,14 @@
-# pyEcoventV2
+# pyBlaubergAHU
 
-Python3 library for single-room energy recovery ventilators from Vents / Blauberg / Flexit
+*** DISCLAIMER ***
+I'm not a Python Programmer! 
+I've forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort AHU
+I poked and prodded it and added parameters from the included PDF so that it worked better with my unit.
+
+Python3 library for a Blauberg Komfort Air Handling Unit
 
 ## Install
-	pip3 install pyEcoventV2
+	pip3 install pyBlaubergAHU
 
 ## Example usage
 	from ecovent import Fan
@@ -45,19 +50,9 @@ Python3 library for single-room energy recovery ventilators from Vents / Blauber
 	print(fan.airflow)
 
 ## Intended usage
-The intended usage of this library is to include ventilation fans from Vents / Blauberg / Flexit in <https://www.home-assistant.io/>
+The intended usage of this library is to include Blauberg Komfort AHU's in <https://www.home-assistant.io/>
 
 ## Tested fans 
 This library has only been tested on the following fans:
-- [Twinfresh Expert RW1-50](http://vents-us.com/item/5262/VENTS_TwinFresh_Expert_RW1-50-2_Wi-Fi/)
-- [Blauberg VENTO Expert A50-1 W](https://blaubergventilatoren.de/en/product/vento-expert-a50-1-w)
-- [Blauberg VENTO Expert A50-1 W](https://blaubergventilatoren.de/en/product/vento-expert-a50-1-w)
-- [Blauberg VENTO EXPERT DUO A30-1 W](https://blaubergventilatoren.de/en/series/vento-expert-duo-a30-1-s10-w-v2)
+- [Blauberg Komfort EC S AHU](https://blaubergventilatoren.de/en/series/komfort-ec-sb-e)
 
-Fans from Flexit are identical and should work, but this is not yet tested:
-- [Single room ventilator Roomie Dual](https://www.flexit.no/en/products/single_room_ventilator/single_room_ventilator_roomie_dual/single_room_ventilator_roomie_dual/)
-
-
-## Changelog
-- v 0.9.9.
--- initialize _battery_voltage with 0 not None
