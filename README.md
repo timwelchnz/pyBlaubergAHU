@@ -3,7 +3,8 @@
 *** DISCLAIMER ***
 I'm not a Python Programmer! 
 
-I've forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort AHU
+I've forked https://github.com/aglehmann/pyEcovent/ as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
+
 I poked and prodded it and added parameters from the included PDF so that it worked better with my unit.
 
 Python3 library for a Blauberg Komfort Air Handling Unit
