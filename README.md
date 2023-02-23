@@ -1,3 +1,5 @@
+![Blauberg Logo](/assets/images/Blauberg-Ventilatoren-Logo.png)
+
 # pyBlaubergAHU
 
 **DISCLAIMER!!**
