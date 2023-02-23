@@ -8,7 +8,7 @@ I am not a Python Programmer!
 
 I forked @aglehmann [pyEcovent library found here](https://github.com/aglehmann/pyEcovent/) as some of it worked on my Blauberg Komfort EC S Air Handling Unit (AHU)
 
-I have poked and prodded it and added parameters from the included PDF so that it worked better with my AHU.
+I have poked and prodded it and added parameters from the [included PDF](/reference/b73_9_1en_01preview.pdf) so that it worked better with my AHU.
 
 Once it was working well I have re-named it completely since it's no longer for just a fan but the whole Air Handling Unit.
 
