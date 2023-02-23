@@ -14,7 +14,7 @@ Once it was working well I have re-named it completely since it's no longer for 
 
 ## Install
 	Manual download at this stage. I'll publish it on PyPi as a pip package when I have v1 ready.
-	~~pip3 install pyBlaubergAHU~~
+~~pip3 install pyBlaubergAHU~~
 
 ## Example usage
 	from pyBlaubergAHU import AHU
