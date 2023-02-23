@@ -54,7 +54,7 @@ Python3 library for a Blauberg Komfort Air Handling Unit
 ## Intended usage
 The intended usage of this library is to include Blauberg Komfort AHU's in <https://www.home-assistant.io/>
 
-## Tested fans 
+## Tested Air Handling Units 
 This library has only been tested on the following fans:
 - [Blauberg Komfort EC S AHU](https://blaubergventilatoren.de/en/series/komfort-ec-sb-e)
 
