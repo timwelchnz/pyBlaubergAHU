@@ -27,11 +27,13 @@ class AHU(object):
     }
 
     speeds = {
-         0: 'standby',
-         1: 'low', 
-         2: 'medium', 
-         3: 'high', 
-         0xff: 'manual'
+         0: 'standby', # This isn't in the documentation but I'll leave it here from the Ecovent library
+         1: '1', 
+         2: '2', 
+         3: '3', 
+         4: '4',
+         5: '5',
+         0xff: 'manual' # This isn't in the documentation but I'll leave it here from the Ecovent library
     }
 
     timer_statuses = {
@@ -51,7 +53,15 @@ class AHU(object):
 
     statuses = {
         0: 'off', 
-        1: 'on' 
+        1: 'on',
+        2: 'invert' # whatever this means?
+    }
+
+    filter_statuses = {
+        0: 'Clean', 
+        1: '1', # This isn't in the documentation but I'll leave it here from the Ecovent library
+        2: '2', # This isn't in the documentation but I'll leave it here from the Ecovent library
+        3: 'Filter replacement timer has been activated' 
     }
 
     airflows = {
@@ -61,7 +71,7 @@ class AHU(object):
     } 
 
     alarms = {
-        0: 'none', 
+        0: 'None', 
         1: 'alarm', 
         2: 'warning' 
     }
@@ -116,10 +126,12 @@ class AHU(object):
     params = {
         0x0001: [ 'state', states ],
         0x0002: [ 'speed', speeds ],
+        0x0003: [ 'max_speed_num', None],
         0x0006: [ 'boost_status', statuses ],
         0x0007: [ 'timer_status', timer_statuses ],  # Timer Status
         0x0008: [ 'timer_mode', timer_modes], # Timer Mode
         # 0x0009: [ 'timer_setpoint_min', None],
+        # 0x000A: [ 'timer_setpoint_hrs', None],
         0x000b: [ 'timer_counter', None ],
         0x000f: [ 'humidity_sensor_state', states ],
         0x0014: [ 'relay_sensor_state', states ],
@@ -152,15 +164,12 @@ class AHU(object):
         0x0083: [ 'alarm_status', alarms ],
         0x0085: [ 'cloud_server_state', states ],
         0x0086: [ 'firmware', None ],
-        0x0088: [ 'filter_replacement_status', statuses ],
+        0x0088: [ 'filter_replacement_status', filter_statuses ],
         0x00a3: [ 'curent_wifi_ip', None ],
-        0x00b7: [ 'airflow' , airflows ],
-        0x00b8: [ 'analogV_treshold', None ],
+        0x00B6: [ 'elect_heater_status', None],
         0x00b9: [ 'unit_type', unit_types ],
-        0x0302: [ 'night_mode_timer', None ],
-        0x0303: [ 'party_mode_timer', None ],
-        0x0304: [ 'humidity_status', statuses ],
-        0x0305: [ 'analogV_status', statuses ],
+        0x00F0: [ 'recirculation_damper', None],
+        0x0401: [ 'sound_generator', None]
     }
 
     write_only_params = {
@@ -189,6 +198,7 @@ class AHU(object):
     _password = None
     _state = None
     _speed = None
+    _max_speed_num = None
     _boost_status = None
     _timer_status = None
     _timer_mode = None
@@ -238,13 +248,12 @@ class AHU(object):
     _wifi_assigned_netmask = None
     _wifi_main_gateway = None
     _curent_wifi_ip = None
-    _airflow = None
+    _elect_heater_status = None
     _analogV_treshold = None
     _unit_type = None
-    _night_mode_timer = None
-    _party_mode_timer = None
-    _humidity_status = None
-    _analogV_status = None
+    _recirculation_damper = None
+    _sound_generator = None
+
 
     def __init__(self, host, password="1111", ahu_id="DEFAULT_DEVICEID", name="Home", port=4000 ):
         self._name = name
@@ -576,7 +585,16 @@ class AHU(object):
     def speed(self, input):
         val = int (input, 16 )
         self._speed = self.speeds[val]
-        
+    
+    @property
+    def max_speed_num(self):
+        return self._max_speed_num
+    
+    @max_speed_num.setter
+    def max_speed_num(self, input):
+        val = int (input, 16)
+        self._max_speed_num = str(val)
+
     @property
     def boost_status(self):
         return self._boost_status
@@ -890,7 +908,9 @@ class AHU(object):
     
     @current_alarms.setter
     def current_alarms(self, input):
-        self._current_alarms = None # Something here keeps erroring so lets just skip for now...
+        val = int(input,16)
+        if self._alarm_status != "none": # If there are no alarms then there is no current alarms to display!
+            self._current_alarms = str (val)
 
     @property
     def alarm_status (self):
@@ -926,7 +946,7 @@ class AHU(object):
     @filter_replacement_status.setter
     def filter_replacement_status(self, input):
         val = int (input, 16 )
-        self._filter_replacement_status = self.statuses[val]
+        self._filter_replacement_status = self.filter_statuses[val]
 
     @property
     def wifi_operation_mode (self):
@@ -1017,23 +1037,14 @@ class AHU(object):
         self._curent_wifi_ip = str(val[0]) + '.' + str(val[1]) + "." + str(val[2]) + "." + str ( val[3] )
 
     @property
-    def airflow(self):
-        return self._airflow
+    def elect_heater_status (self):
+            return self._elect_heater_status
+    
+    @elect_heater_status.setter
+    def elect_heater_status(self, input):
+        val = int(input, 16)
+        self._elect_heater_status = str(val)
 
-    @airflow.setter
-    def airflow(self, input ):
-        val = int (input, 16 )
-        self._airflow = self.airflows[val]
-
-    @property
-    def analogV_treshold (self):
-        return self._analogV_treshold
-
-    @analogV_treshold.setter
-    def analogV_treshold(self, input):
-        val = int(input,16)
-        self._analogV_treshold = str(val)
-        
     @property
     def unit_type (self):
         return self._unit_type
@@ -1044,40 +1055,22 @@ class AHU(object):
         self._unit_type = self.unit_types[val] 
 
     @property
-    def night_mode_timer (self):
-        return self._night_mode_timer
-
-    @night_mode_timer.setter
-    def night_mode_timer(self, input):
-        val = int(input,16).to_bytes(2,'big')
-        self._night_mode_timer = str(val[1]).zfill(2) + "h " + str(val[0]).zfill(2) + "m"
-
-    @property
-    def party_mode_timer (self):
-        return self._party_mode_timer
-
-    @party_mode_timer.setter
-    def party_mode_timer(self, input):
-        val = int(input,16).to_bytes(2,'big')
-        self._party_mode_timer = str(val[1]).zfill(2) + "h " + str(val[0]).zfill(2) + "m"
+    def recirculation_damper (self):
+        return self._recirculation_damper
+    
+    @recirculation_damper.setter
+    def recirculation_damper(self, input):
+        val = int (input, 16)
+        self._recirculation_damper = str(val)
 
     @property
-    def humidity_status (self):
-        return self._humidity_status
-
-    @humidity_status.setter
-    def humidity_status(self, input):
-        val = int (input, 16 )
-        self._humidity_status = self.statuses[val]
-
-    @property
-    def analogV_status (self):
-        return self._analogV_status
-
-    @analogV_status.setter
-    def analogV_status(self, input):
-        val = int (input, 16 )
-        self._analogV_status = self.statuses[val]
+    def sound_generator (self):
+        return self._sound_generator
+    
+    @sound_generator.setter
+    def sound_generator(self, input):
+        val = int (input, 16)
+        self._sound_generator = str(val)
 
     def reset_filter_timer(self):
         self.set_param('filter_timer_reset', "")

@@ -1,5 +1,5 @@
 from blaubergahu import AHU
-ahu = AHU("192.168.1.227") # Replace IP with your known AHU IP Address.
+ahu = AHU("192.168.1.227","1111", "001B00544656500C" ) # Replace IP with your known AHU IP Address, Password and Device ID
 ahu.update()
 
 for i in ( ahu.params ):
