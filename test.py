@@ -38,10 +38,10 @@ for i in ( ahu.params ):
 # ahu.set_param('man_speed', hex(math.ceil( man_speed * 255 / 100 )).replace("0x","").zfill(2) ) # hex(math.ceil( speed_in_% * 255 / 100 )).replace("0x","").zfill(2)
 # print ( 'man_speed: ' + ahu.man_speed )
 
-# ahu.set_param('state','togle')
+# ahu.set_param('state','toggle')
 
-# ahu.set_param('state','off') #'on','off','togle'
-# ahu.set_param('speed','manual') #'low','medium','high','manual'
+# ahu.set_param('state','off') #'on','off','toggle'
+# ahu.set_param('speed','2') #'1','2','3','manual'
 # print ( 'speed: ' + ahu.speed )
 
 
@@ -51,7 +51,7 @@ for i in ( ahu.params ):
 # print ( 'airflow: ' + ahu.airflow )
 
 # Set examples
-# ahu.set_param('state','togle') #'on','off','togle'
+# ahu.set_param('state','toggle') #'on','off','toggle'
 # print ( 'state: ' + ahu.state )
 # ahu.set_param('speed','manual') #'low','medium','high','manual'
 # print ( 'speed: ' + ahu.speed )
@@ -65,13 +65,13 @@ for i in ( ahu.params ):
 # ahu.update()
 # print ( 'timer_counter: ' + ahu.timer_counter )
 
-# ahu.set_param('humidity_sensor_state','on') # 'off', 'on', 'togle'
+# ahu.set_param('humidity_sensor_state','on') # 'off', 'on', 'toggle'
 # print ( 'humidity_sensor_state: ' + ahu.humidity_sensor_state )
 
-# ahu.set_param('relay_sensor_state','off') # 'off', 'on', 'togle'
+# ahu.set_param('relay_sensor_state','off') # 'off', 'on', 'toggle'
 # print ( 'relay_sensor_state: ' + ahu.relay_sensor_state )
 
-# ahu.set_param('analogV_sensor_state','off') # 'off', 'on', 'togle'
+# ahu.set_param('analogV_sensor_state','off') # 'off', 'on', 'toggle'
 # print ( 'analogV_sensor_state: ' + ahu.analogV_sensor_state )
 
 # ahu.set_param('humidity_treshold',hex(60).replace("0x","").zfill(2)) #hex(humidity_in_%).replace("0x","").zfill(2) 
@@ -93,7 +93,7 @@ for i in ( ahu.params ):
 #ahu.set_param('rtc_date', hex(day).replace("0x","").zfill(2) + hex(day_in_week).replace("0x","").zfill(2) + hex(month).replace("0x","").zfill(2) + hex(year).replace("0x","").zfill(2))
 #print ( 'rtc_date: ' + ahu.rtc_date )
 
-#ahu.set_param('cloud_server_state','off') # 'off', 'on', 'togle'
+#ahu.set_param('cloud_server_state','off') # 'off', 'on', 'toggle'
 #print ( 'cloud_server_state: ' + ahu.cloud_server_state )
 
 #ahu.set_param('airflow','heat_recovery') # 'ventilation', 'heat_recovery', 'air_supply'

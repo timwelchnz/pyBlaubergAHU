@@ -1,6 +1,11 @@
+import sys
 from blaubergahu import AHU
-ahu = AHU("192.168.1.227","1111", "001B00544656500C" ) # Replace IP with your known AHU IP Address, Password and Device ID
-ahu.update()
+# Replace IP with your known AHU IP Address, Password and Device ID from that in the mobile app
+ahu = AHU("192.168.1.230","1111", "001B00544656500C" ) 
+result = ahu.update()
+if result == False:
+    print("Update unsuccessful - check IP Addr, Password, Device ID")
+    sys.exit(1)
 
 for i in ( ahu.params ):
     if ahu.params[i][0] in ['filter_timer_reset', 'reset_alarms']:

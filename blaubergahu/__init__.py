@@ -57,6 +57,12 @@ class AHU(object):
         2: 'invert' # whatever this means?
     }
 
+    temp_sensors = {
+        0: 'Exhaust Duct',
+        1: 'External Sensor',
+        2: 'Supply Duct'
+    }
+    
     filter_statuses = {
         0: 'Clean', 
         1: '1', # This isn't in the documentation but I'll leave it here from the Ecovent library
@@ -127,45 +133,145 @@ class AHU(object):
         0x0001: [ 'state', states ],
         0x0002: [ 'speed', speeds ],
         0x0003: [ 'max_speed_num', None],
+        0x0004: [ 'param_0x0004', None],
+        0x0005: [ 'param_0x0005', None],
         0x0006: [ 'boost_status', statuses ],
         0x0007: [ 'timer_status', timer_statuses ],  # Timer Status
         0x0008: [ 'timer_mode', timer_modes], # Timer Mode
         # 0x0009: [ 'timer_setpoint_min', None],
-        # 0x000A: [ 'timer_setpoint_hrs', None],
+        # 0x000a: [ 'timer_setpoint_hrs', None],
         0x000b: [ 'timer_counter', None ],
+        0x000d: [ 'room_temp_setpoint_timer', NotImplemented],  # Room temperature setpoint in timer mode
+        0x000e: [ 'param_0x000e', None],
         0x000f: [ 'humidity_sensor_state', states ],
         0x0014: [ 'relay_sensor_state', states ],
-        0x0016: [ 'analogV_sensor_state', states ],
-        0x0018: [ 'room_temp_setpoint', None],
-        0x0019: [ 'humidity_treshold', None ],
-        0x001E: [ 'current_temp', None ],
+        0x0015: [ 'param_0x0015', None],
+        0x0016: [ 'param_0x0016', None], 
+        0x0017: [ 'param_0x0017', None],
+        0x0018: [ 'room_temp_setpoint', None], # Room temperature setpoint in normal mode
+        0x0019: [ 'humidity_treshold', None ], 
+        0x001a: [ 'param_0x001a', None],
+        0x001b: [ 'param_0x001b', None],
+        0x001c: [ 'param_0x001c', None],
+        0x001d: [ 'temp_sensor_control', temp_sensors],  # Selecting a temperature sensor for controlling room temperature
+        0x001e: [ 'current_temp', None ],   # Current temperature controlling the room temperature
         0x001f: [ 'intake_air_temp', None],
         0x0020: [ 'supply_air_temp', None],
         0x0021: [ 'extract_air_temp', None],
-        0x0022: [ 'exhaust_air_temp', None],
+        0x0022: [ 'exhaust_air_temp', None], # Current exhaust air temperature at the unit outlet
+        0x0023: [ 'param0x23', None],
         0x0024: [ 'battery_voltage', None ],
         0x0025: [ 'humidity', None ],
-        0x002d: [ 'analogV', None ],
-        0x0032: [ 'relay_status', statuses ],
+        0x0026: [ 'param_0x0026', None],
+        0x0027: [ 'param_0x0027', None],
+        0x0028: [ 'param_0x0028', None],
+        0x0029: [ 'param_0x0029', None],
+        0x002a: [ 'param_0x002a', None],
+        0x002b: [ 'param_0x002b', None],
+        0x002c: [ 'param_0x002c', None],
+        0x002d: [ 'analogV', None ], # Doesn't appear to be implemented in an AHU
+        0x002e: [ 'param_0x002e', None],
+        0x002f: [ 'param_0x002f', None],
+        0x0030: [ 'param_0x0030', None],
+        0x0031: [ 'param_0x0031', None],
+        0x0032: [ 'boost_switch_status', statuses ],  # Read Only - Current Boost switch status
+        0x0033: [ 'fire_alarm_sensor', None],  # Read Only - Current fire alarm sensor status
+        0x0034: [ 'param_0x0034', None],
+        0x0035: [ 'param_0x0035', None],
+        0x0036: [ 'minimum_fan_speed', None],  # 0...100 %
+        0x0037: [ 'maximum_fan_speed', None],  # Documentation repeats Minimum but surely this is Maximum
         0x003A: [ 'supply_fan_speed_mode1', None],
         0x003B: [ 'exhaust_fan_speed_mode1', None],
+        0x003C: [ 'supply_fan_speed_mode2', None],
+        0x003D: [ 'exhaust_fan_speed_mode2', None],
+        0x003E: [ 'supply_fan_speed_mode3', None],
+        0x003F: [ 'exhaust_fan_speed_mode3', None],
+        0x0040: [ 'supply_fan_speed_mode4', None],
+        0x0041: [ 'exhaust_fan_speed_mode4', None],
+        0x0042: [ 'supply_fan_speed_mode5', None],
+        0x0043: [ 'exhaust_fan_speed_mode5', None],
         0x0044: [ 'man_speed', None ],
+        0x0045: [ 'param_0x0045', None],
+        0x0046: [ 'param_0x0046', None],
+        0x0047: [ 'param_0x0047', None],
+        0x0048: [ 'param_0x0048', None],
+        0x0049: [ 'param_0x0049', None],
         0x004a: [ 'fan1_speed', None ],
         0x004b: [ 'fan2_speed', None ],
+        0x004c: [ 'param_0x004c', None],
+        0x004d: [ 'param_0x004d', None],
+        0x004e: [ 'param_0x004e', None],
+        0x004f: [ 'param_0x004f', None],
+        0x0051: [ 'param_0x0051', None],
+        0x0052: [ 'param_0x0052', None],
+        0x0053: [ 'param_0x0053', None],
+        0x0054: [ 'param_0x0054', None ],
+        0x0055: [ 'param_0x0055', None],
+        0x0056: [ 'param_0x0056', None],
+        0x0057: [ 'param_0x0057', None],
+        0x0058: [ 'param_0x0058', None],
+        0x0059: [ 'param_0x0059', None],
+        0x005a: [ 'param_0x005a', None ],
+        0x005b: [ 'param_0x005b', None ],
+        0x005c: [ 'param_0x005c', None],
+        0x005d: [ 'param_0x005d', None],
+        0x005e: [ 'param_0x005e', None],
+        0x005f: [ 'param_0x005f', None],
         0x0060: [ 'main_heater_type', main_heater_types],
+        0x0061: [ 'param_0x0061', None],
+        0x0062: [ 'param_0x0062', None],
+        0x0063: [ 'param_0x0063', None],
         0x0064: [ 'filter_timer_countdown', None ],
         0x0066: [ 'boost_time', None ],
+        # 0x0067: [ 'param_0x0067', None], # Not returned in an AHU
+        # 0x0068: [ 'param_0x0068', None], # Not returned in an AHU
+        # 0x0069: [ 'param_0x0069', None], # Not returned in an AHU
+        # 0x006a: [ 'param_0x006a', None],
+        # 0x006b: [ 'param_0x006b', None],
+        # 0x006c: [ 'param_0x006c', None],
+        # 0x006d: [ 'param_0x006d', None],
+        # 0x006e: [ 'param_0x006e', None],
         0x006f: [ 'rtc_time', None ],
         0x0070: [ 'rtc_date', None ],
+        0x0071: [ 'param_0x0071', None],
+        0x0072: [ 'weekly_schedule_state', states],
+        0x0073: [ 'weekly_schedule_speed', None], # Weekly schedule speed
+        0x0074: [ 'weekly_schedule_temp', None], # Weekly schedule temperature setup
+        # 0x0075: [ 'param_0x0075', None], # Not returned in an AHU
+        # 0x0076: [ 'param_0x0076', None], # Not returned in an AHU
+        0x0077: [ 'weekly_schedule_setup', None ], # Schedule setup Byte
+        0x0078: [ 'param_0x0078', None],
+        0x0079: [ 'param_0x0079', None],
+        0x007a: [ 'param_0x007a', None ],
+        0x007b: [ 'param_0x007b', None ],
         0x007c: [ 'device_search', None ],
         0x007d: [ 'device_password', None ],
-        0x007e: [ 'machine_hours', None ],
+        0x007e: [ 'motor_hours', None ],
         # 0x007F: [ 'current_alarms', None], # Urg, this errors when there are no alarms...
+        # 0x0080: [ 'param_0x0080', None ], # Not returned in an AHU
+        0x0081: [ 'param_0x0081', None ], # Heater status
+        0x0082: [ 'param_0x0082', None ], 
         0x0083: [ 'alarm_status', alarms ],
+        0x0084: [ 'param_0x0084', None ],
         0x0085: [ 'cloud_server_state', states ],
         0x0086: [ 'firmware', None ],
+        # 0x0087: [ 'param_0x0087', None ], # Not returned in an AHU
         0x0088: [ 'filter_replacement_status', filter_statuses ],
-        0x00a3: [ 'curent_wifi_ip', None ],
+        0x0089: [ 'param_0x0089', None ],
+        # 0x0090: [ 'param_0x0090', None ],
+        0x0091: [ 'param_0x0091', None ],
+        0x0092: [ 'param_0x0092', None ],
+        0x0093: [ 'param_0x0093', None ],
+        0x0094: [ 'wifi_operation_mode', None ], # Wi-Fi operation mode
+        0x0095: [ 'wifi_ssid', None ], # Wi-Fi name in Client mode
+        0x0096: [ 'wifi_password', None ],
+        0x0099: [ 'wifi_encryption_type', None], # Wi-Fi data encryption type 
+        0x009a: [ 'wifi_freq_chan', None ], # Wi-Fi frequency channel
+        0x009b: [ 'wifi_dhcp', None ], # Wi-Fi module DHCP 
+        0x009c: [ 'wifi_ip', None ], # IP address assigned to Wi-Fi module
+        0x009d: [ 'wifi_subnet_mask', None ], # Wi-Fi module subnet mask
+        0x009e: [ 'wifi_gateway', None ], # Wi-Fi module subnet mask
+        0x00a3: [ 'curent_wifi_ip', None ], # Current Wi-Fi module IP address
         0x00B6: [ 'elect_heater_status', None],
         0x00b9: [ 'unit_type', unit_types ],
         0x00F0: [ 'recirculation_damper', None],
@@ -174,8 +280,6 @@ class AHU(object):
 
     write_only_params = {
         0x0065: [ 'filter_timer_reset', None ],		# WRITE ONLY
-#        0x0072: [ 'weekly_schedule_state', states ],
-        0x0077: [ 'weekly_schedule_setup', None ],
         0x0080: [ 'reset_alarms', None ],	# WRITE ONLY        
         0x0087: [ 'factory_reset', None ],
         0x00a0: [ 'wifi_apply_and_quit', None ],
@@ -217,9 +321,17 @@ class AHU(object):
     _battery_voltage = 0
     _humidity = None
     _analogV = None
-    _relay_status = None
+    _boost_switch_status = None
     _supply_fan_speed_mode1 = None
     _exhaust_fan_speed_mode1 = None
+    _supply_fan_speed_mode2 = None
+    _exhaust_fan_speed_mode2 = None
+    _supply_fan_speed_mode3 = None
+    _exhaust_fan_speed_mode3 = None
+    _supply_fan_speed_mode4 = None
+    _exhaust_fan_speed_mode4 = None
+    _supply_fan_speed_mode5 = None
+    _exhaust_fan_speed_mode5 = None
     _man_speed = None
     _fan1_speed = None
     _fan2_speed = None
@@ -232,7 +344,7 @@ class AHU(object):
     _weekly_schedule_setup = None
     _device_search = None
     _device_password = None
-    _machine_hours = None
+    _motor_hours = None
     _current_alarms = None
     _alarm_status = None
     _cloud_server_state = None
@@ -247,6 +359,7 @@ class AHU(object):
     _wifi_assigned_ip = None
     _wifi_assigned_netmask = None
     _wifi_main_gateway = None
+    _wifi_ip = None
     _curent_wifi_ip = None
     _elect_heater_status = None
     _analogV_treshold = None
@@ -254,8 +367,9 @@ class AHU(object):
     _recirculation_damper = None
     _sound_generator = None
 
+#    def __init__(self, host, password="1111", ahu_id="DEFAULT_DEVICEID", name="Home", port=4000 ):
 
-    def __init__(self, host, password="1111", ahu_id="DEFAULT_DEVICEID", name="Home", port=4000 ):
+    def __init__(self, host, password="1111", ahu_id="001B00544656500C", name="Home", port=4000 ):
         self._name = name
         self._host = host
         self._port = port
@@ -362,7 +476,7 @@ class AHU(object):
             response = self.socket.sendall( bytes.fromhex(payload))
             return response
         except socket.timeout:
-            # print ( "EcoventV2: Connection timeout send to device: " + self._host , file = sys.stderr )
+            # print ( "BlaubergAHU: Connection timeout send to device: " + self._host , file = sys.stderr )
             return None
 
     def receive(self):
@@ -371,7 +485,7 @@ class AHU(object):
             self.socket.close()
             return response
         except socket.timeout:
-            # print ( "EcoventV2: Connection timeout receive from device: " + self._host , file = sys.stderr )
+            # print ( "BlaubergAHU: Connection timeout receive from device: " + self._host , file = sys.stderr )
             self.socket.close()
             return ( False )
 
@@ -407,7 +521,7 @@ class AHU(object):
                 self.parse_response(response)
                 return True
             if i >= 10:
-                # print ("EcoventV2: Timeout device: " + self._host + " bail out after " + str(i) + " retries" , file = sys.stderr )
+                # print ("BlaubergAHU: Timeout device: " + self._host + " bail out after " + str(i) + " retries" , file = sys.stderr )
                 return False
             # time.sleep(0.1)
 
@@ -758,13 +872,16 @@ class AHU(object):
         self._analogV = str( val )
 
     @property
-    def relay_status (self):
-        return self._relay_status
+    def boost_switch_status (self):
+        return self._boost_switch_status
 
-    @relay_status.setter
-    def relay_status(self, input):
+    @boost_switch_status.setter
+    def boost_switch_status(self, input):
         val = int (input, 16 )
-        self._relay_status = self.statuses[val]
+        self._boost_switch_status = self.statuses[val]
+
+# Below here is all the fan speeds
+# Supply Fan Mode 1
 
     @property
     def supply_fan_speed_mode1 (self):
@@ -775,7 +892,8 @@ class AHU(object):
         val = int(input, 16 )
         if val >= 0 and val <= 255:
             self._supply_fan_speed_mode1 = int( val / 255 * 100)
-    
+
+# Exhaust Fan Mode 1 
     @property
     def exhaust_fan_speed_mode1 (self):
         return self._exhaust_fan_speed_mode1
@@ -785,6 +903,100 @@ class AHU(object):
         val = int(input, 16 )
         if val >= 0 and val <= 255:
             self._exhaust_fan_speed_mode1 = int( val / 255 * 100)
+
+# Supply Fan Mode 2
+
+    @property
+    def supply_fan_speed_mode2 (self):
+        return self._supply_fan_speed_mode2
+    
+    @supply_fan_speed_mode2.setter
+    def supply_fan_speed_mode2(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._supply_fan_speed_mode2 = int( val / 255 * 100)
+
+# Exhaust Fan Mode 2 
+    @property
+    def exhaust_fan_speed_mode2 (self):
+        return self._exhaust_fan_speed_mode2
+    
+    @exhaust_fan_speed_mode2.setter
+    def exhaust_fan_speed_mode2(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._exhaust_fan_speed_mode2 = int( val / 255 * 100)
+
+# Supply Fan Mode 3
+
+    @property
+    def supply_fan_speed_mode3 (self):
+        return self._supply_fan_speed_mode3
+    
+    @supply_fan_speed_mode3.setter
+    def supply_fan_speed_mode3(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._supply_fan_speed_mode3 = int( val / 255 * 100)
+
+# Exhaust Fan Mode 3 
+    @property
+    def exhaust_fan_speed_mode3 (self):
+        return self._exhaust_fan_speed_mode3
+    
+    @exhaust_fan_speed_mode3.setter
+    def exhaust_fan_speed_mode3(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._exhaust_fan_speed_mode3 = int( val / 255 * 100)
+
+# Supply Fan Mode 4
+
+    @property
+    def supply_fan_speed_mode4 (self):
+        return self._supply_fan_speed_mode4
+    
+    @supply_fan_speed_mode4.setter
+    def supply_fan_speed_mode4(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._supply_fan_speed_mode4 = int( val / 255 * 100)
+
+# Exhaust Fan Mode 4 
+    @property
+    def exhaust_fan_speed_mode4 (self):
+        return self._exhaust_fan_speed_mode4
+    
+    @exhaust_fan_speed_mode4.setter
+    def exhaust_fan_speed_mode4(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._exhaust_fan_speed_mode4 = int( val / 255 * 100)
+
+# Supply Fan Mode 5
+
+    @property
+    def supply_fan_speed_mode5 (self):
+        return self._supply_fan_speed_mode5
+    
+    @supply_fan_speed_mode5.setter
+    def supply_fan_speed_mode5(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._supply_fan_speed_mode5 = int( val / 255 * 100)
+
+# Exhaust Fan Mode 5 
+    @property
+    def exhaust_fan_speed_mode5 (self):
+        return self._exhaust_fan_speed_mode5
+    
+    @exhaust_fan_speed_mode5.setter
+    def exhaust_fan_speed_mode5(self, input):
+        val = int(input, 16 )
+        if val >= 0 and val <= 255:
+            self._exhaust_fan_speed_mode5 = int( val / 255 * 100)
+
+# Above here is all the fan speeds
 
     @property
     def man_speed(self):
@@ -894,13 +1106,13 @@ class AHU(object):
         self._device_password = self.hex2str(val)        
 
     @property
-    def machine_hours(self):
-        return self._machine_hours
+    def motor_hours(self):
+        return self._motor_hours
 
-    @machine_hours.setter
-    def machine_hours(self, input ):
+    @motor_hours.setter
+    def motor_hours(self, input ):
         val = int(input,16).to_bytes(4,'big')
-        self._machine_hours = str ( int.from_bytes(val[2:3],'big') ) + "d " + str ( val[1] ) + "h " +str ( val[0] ) + "m "
+        self._motor_hours = str ( int.from_bytes(val[2:3],'big') ) + "d " + str ( val[1] ) + "h " +str ( val[0] ) + "m "
 
     @property
     def current_alarms(self):
@@ -1026,6 +1238,15 @@ class AHU(object):
     def wifi_main_gateway(self, input):
         val = int(input,16).to_bytes(4,'big')
         self._wifi_main_gateway = str(val[0]) + '.' + str(val[1]) + "." + str(val[2]) + "." + str ( val[3] )
+
+    @property
+    def wifi_ip (self):
+        return self._wifi_ip
+
+    @wifi_ip.setter
+    def wifi_ip(self, input):
+        val = int(input,16).to_bytes(4,'big')
+        self._wifi_ip = str(val[0]) + '.' + str(val[1]) + "." + str(val[2]) + "." + str ( val[3] )
 
     @property
     def curent_wifi_ip (self):
